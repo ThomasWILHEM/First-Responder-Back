@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, DateTime
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, DateTime, Enum
 from sqlalchemy.orm import relationship
 from .scenario import Scenario
 
@@ -9,7 +9,11 @@ class Emergency_Call(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     position = Column(String)
-    timestamp = Column(DateTime)
+    call_timestamp = Column(DateTime)
+    start_timestamp = Column(DateTime)
+    completion_timestamp = Column(DateTime)
+    mission_status = Column(Enum)
+    mission_result = Column(Enum)
 
-    type = relationship("Scenario")
-
+    scenario = relationship("Scenario")
+    resources = relationship("Emergency_Ressource", back_populates="call")
