@@ -1,6 +1,13 @@
-from pydantic import BaseModel, HttpUrl
+from pydantic import BaseModel
 
-class Scenario_Type(BaseModel):
-    id: int
+class ScenarioTypeCreate(BaseModel):
     name: str
-    
+
+class ScenarioType(ScenarioTypeCreate):
+    id: int
+
+class ScenarioTypeUpdate(BaseModel):
+    name: str
+
+class AllScenarioTypes(BaseModel):
+    results: list[ScenarioType]

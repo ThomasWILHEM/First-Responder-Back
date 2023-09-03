@@ -1,11 +1,19 @@
 from pydantic import BaseModel
-from .scenario_type import Scenario_Type
+from .scenario_type import ScenarioType
 
-class Scenario(BaseModel):
-    id: int
+class ScenarioCreate(BaseModel):
     name: str
     description: str
-    type: Scenario_Type
+    type_id: int
+
+class Scenario(ScenarioCreate):
+    id: int
+    type: ScenarioType
+
+class ScenarioUpdate(BaseModel):
+    name: str
+    description: str
+    type_id: int
 
 class AllScenarios(BaseModel):
     results: list[Scenario]
