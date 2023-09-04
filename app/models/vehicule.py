@@ -2,7 +2,7 @@ from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, DateTime, E
 from sqlalchemy.orm import relationship
 from .vehicule_type import Vehicule_Type  
 from .building import Building  
-from .emergency_call import Emergency_Call  
+from .call import Call
 
 from database import Base
 
