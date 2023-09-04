@@ -15,5 +15,8 @@ class ScenarioUpdate(BaseModel):
     description: str
     type_id: int
 
+class ScenarioDelete(ScenarioCreate):
+    id: int
+
 class AllScenarios(BaseModel):
     results: list[Scenario]

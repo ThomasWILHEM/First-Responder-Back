@@ -9,5 +9,8 @@ class ScenarioType(ScenarioTypeCreate):
 class ScenarioTypeUpdate(BaseModel):
     name: str
 
+class ScenarioTypeDelete(BaseModel):
+    id: int
+
 class AllScenarioTypes(BaseModel):
     results: list[ScenarioType]
