@@ -17,10 +17,10 @@ def get_scenario_by_id(db: Session = Depends(get_db), scenario_id: int = Path(..
         raise HTTPException(status_code=404, detail="Scenario not found")
     return db_scenario
 
-@router.post("/scenarios/", response_model=schemas.Scenario)
+@router.post("/", response_model=schemas.Scenario)
 def create_scenario(scenario_create: schemas.ScenarioCreate, db: Session = Depends(get_db)):
     return crud_scenario.create_scenario(db, scenario_create)
 
-@router.get("/scenarios/{scenario_id}", response_model=schemas.Scenario)
+@router.get("/{scenario_id}", response_model=schemas.Scenario)
 def read_scenario(scenario: schemas.Scenario = Depends(get_scenario_by_id)):
     return scenario
