@@ -12,6 +12,12 @@ router = APIRouter(
 )
 
 
+@router.get("/", response_model=schemas.AllScenarios)
+def read_all_scenarios(db: Session = Depends(get_db)):
+    scenarios = crud_scenario.get_all_scenarios(db)
+    return {"results": scenarios}
+
+
 def get_scenario_by_id(db: Session = Depends(get_db), scenario_id: int = Path(...)):
     db_scenario = crud_scenario.get_scenario(db, scenario_id)
     if db_scenario is None:

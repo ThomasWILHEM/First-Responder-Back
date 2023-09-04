@@ -3,6 +3,10 @@ from ..models import scenario_type
 from ..schemas import scenario_type as schemas
 
 
+def get_all_scenario_types(db: Session, skip: int = 0, limit: int = 100):
+    return db.query(scenario_type.ScenarioType).offset(skip).limit(limit).all()
+
+
 def create_scenario_type(db: Session, scenario_type_create: schemas.ScenarioTypeCreate):
     db_scenario_type = scenario_type.ScenarioType(**scenario_type_create.dict())
     db.add(db_scenario_type)

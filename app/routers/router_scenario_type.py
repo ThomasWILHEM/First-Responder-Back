@@ -18,6 +18,12 @@ def get_scenario_type_by_id(db: Session = Depends(get_db), scenario_type_id: int
     return db_scenario_type
 
 
+@router.get("/", response_model=schemas.AllScenarioTypes)
+def read_all_scenario_types(db: Session = Depends(get_db)):
+    scenario_types = crud_scenario_type.get_all_scenario_types(db)
+    return {"results": scenario_types}
+
+
 @router.post("/", response_model=schemas.ScenarioType)
 def create_scenario_type(scenario_type: schemas.ScenarioTypeCreate, db: Session = Depends(get_db)):
     return crud_scenario_type.create_scenario_type(db, scenario_type)
