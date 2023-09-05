@@ -9,3 +9,5 @@ class VehicleType(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, unique=True, index=True)
+
+    vehicles = relationship("Vehicle", back_populates="type")

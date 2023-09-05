@@ -1,7 +1,7 @@
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, DateTime, Enum
 from sqlalchemy.orm import relationship
 from .call import Call
-from .vehicule import Vehicule
+from .vehicle import Vehicule
 
 from ..utils.database import Base
 
