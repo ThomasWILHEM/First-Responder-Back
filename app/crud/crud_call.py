@@ -17,3 +17,8 @@ def create_call(db: Session, call_create: schemas.CallCreate):
     db.commit()
     db.refresh(db_call)
     return db_call
+
+
+def delete_call(db: Session, call: call.Call):
+    db.delete(call)
+    db.commit()

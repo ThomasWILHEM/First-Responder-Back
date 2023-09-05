@@ -5,6 +5,7 @@ from typing import Tuple
 
 from ..utils.database import Base
 
+
 class Call(Base):
     __tablename__ = "calls"
 

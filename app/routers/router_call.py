@@ -33,3 +33,12 @@ def create_scenario(call_create: schemas.CallCreate, db: Session = Depends(get_d
     return crud_call.create_call(db, call_create)
 
 
+@router.get("/{call_id}", response_model=schemas.Call)
+def read_call(call: schemas.Call = Depends(get_call_by_id)):
+    return call
+
+
+@router.delete("/{call_id}")
+def delete_call(db: Session = Depends(get_db), call: schemas.Call = Depends(get_call_by_id)):
+    crud_call.delete_call(db, call)
+    return {"message": "Call deleted"}

@@ -41,4 +41,4 @@ def read_scenario(scenario: schemas.Scenario = Depends(get_scenario_by_id)):
 @router.delete("/{scenario_id}")
 def delete_scenario(db: Session = Depends(get_db), scenario: schemas.Scenario = Depends(get_scenario_by_id)):
     crud_scenario.delete_scenario(db, scenario)
-    return {"message" : "Scenario deleted"}
+    return {"message": "Scenario deleted"}

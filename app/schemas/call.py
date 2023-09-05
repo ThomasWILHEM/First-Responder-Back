@@ -1,5 +1,4 @@
 from pydantic import BaseModel
-from typing import Tuple
 from datetime import datetime
 from .scenario import Scenario
 
