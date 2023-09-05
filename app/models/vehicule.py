@@ -1,6 +1,6 @@
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, DateTime, Enum
 from sqlalchemy.orm import relationship
-from .vehicule_type import Vehicule_Type  
+from .vehicle_type import Vehicule_Type
 from .building import Building  
 from .call import Call
 
