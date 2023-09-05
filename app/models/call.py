@@ -11,8 +11,8 @@ class Call(Base):
     id = Column(Integer, primary_key=True, index=True)
     coordinates_latitude = Column(Float)
     coordinates_longitude = Column(Float)
-    timestamp = Column(DateTime, default=datetime.utcnow)
-    completion_timestamp = Column(DateTime)
+    datetime = Column(DateTime, default=datetime.utcnow)
+    completion_datetime = Column(DateTime)
     scenario_id = Column(Integer, ForeignKey("scenarios.id"))
     mission_status = Column(String)
 
