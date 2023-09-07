@@ -34,8 +34,8 @@ def add_staff_to_vehicle(db: Session, staff_id: int, vehicle_id: int):
     if not vehicle_instance:
         raise ValueError("Vehicle not found")
 
-    #vehicle_instance.occupants.append(staff_instance)
+    vehicle_instance.occupants.append(staff_instance)
     staff_instance.vehicle = vehicle_instance
 
     db.commit()
-    return vehicle_id
+    return vehicle_instance
