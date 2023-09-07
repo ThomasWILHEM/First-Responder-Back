@@ -17,6 +17,7 @@ class VehicleUpdate(BaseModel):
     coordinates_latitude: float
     coordinates_longitude: float
 
+
 class VehicleDelete(VehicleCreate):
     id: int
 

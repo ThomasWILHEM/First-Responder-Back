@@ -15,6 +15,7 @@ class Vehicle(Base):
 
     type = relationship("VehicleType", back_populates="vehicles")
 
+    occupants = relationship("Staff", back_populates="vehicle")
     #building = relationship("Building", back_populates="staffs")
     #mission = relationship("Emergency_Call", back_populates="vehicule")
 

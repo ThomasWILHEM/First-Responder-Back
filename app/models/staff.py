@@ -1,6 +1,7 @@
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, DateTime, Enum
 from sqlalchemy.orm import relationship
 from .staff_type import StaffType
+from .vehicle import Vehicle
 
 from ..utils.database import Base
 
@@ -12,9 +13,10 @@ class Staff(Base):
     firstname = Column(String, index=True)
     lastname = Column(String, index=True)
     type_id = Column(Integer, ForeignKey("staff_types.id"))
+    vehicle_id = Column(Integer, ForeignKey("vehicles.id"))
 
     type = relationship("StaffType", back_populates="staffs")
+    vehicle = relationship("Vehicle", back_populates="occupants")
     #building = relationship("Building", back_populates="staffs")
-    #vehicule = relationship("Vehicule", back_populates="occupants")
 
 

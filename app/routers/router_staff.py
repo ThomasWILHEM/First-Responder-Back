@@ -42,3 +42,17 @@ def read_staff(staff: schemas.Staff = Depends(get_staff_by_id)):
 def delete_staff(db: Session = Depends(get_db), staff: schemas.Staff = Depends(get_staff_by_id)):
     crud_staff.delete_staff(db, staff)
     return {"message": "Staff deleted"}
+
+
+@router.post("/add_to_vehicle", response_model=schemas.Vehicle)
+def add_staff_to_vehicle(
+    staff_id: int,
+    vehicle_id: int,
+    db: Session = Depends(get_db),
+):
+    updated_vehicle = crud_staff.add_staff_to_vehicle(db, staff_id, vehicle_id)
+
+    if not updated_vehicle:
+        raise HTTPException(status_code=404, detail="Vehicle not found")
+
+    return updated_vehicle
