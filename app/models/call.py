@@ -18,4 +18,4 @@ class Call(Base):
     mission_status = Column(String)
 
     scenario = relationship("Scenario")
-    #resources = relationship("Emergency_Ressource", back_populates="call.py")
+    vehicles = relationship("Vehicle", back_populates="call")

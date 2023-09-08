@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session
 from ..models import vehicle
 from ..schemas import vehicle as schemas
+from . import crud_vehicle, crud_call
 
 
 def get_all_vehicles(db: Session, skip: int = 0, limit: int = 100):
@@ -22,3 +23,18 @@ def create_vehicle(db: Session, vehicle_create: schemas.VehicleCreate):
 def delete_vehicle(db: Session, vehicle: vehicle.Vehicle):
     db.delete(vehicle)
     db.commit()
+
+def send_to_call(db: Session, call_id: int, vehicle_id: int):
+    call_instance = crud_call.get_call(db, call_id)
+    vehicle_instance = crud_vehicle.get_vehicle(db, vehicle_id)
+
+    if not call_instance:
+        raise ValueError("Call not found")
+    if not vehicle_instance:
+        raise ValueError("Vehicle not found")
+
+    call_instance.vehicles.append(vehicle_instance)
+    vehicle_instance.call = call_instance
+
+    db.commit()
+    return call_instance

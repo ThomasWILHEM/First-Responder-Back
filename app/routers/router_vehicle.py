@@ -4,6 +4,7 @@ from typing import List
 from ..dependencies import get_db
 from ..crud import crud_vehicle, crud_vehicle_type
 from ..schemas import vehicle as schemas
+from ..schemas import call
 
 router = APIRouter(
     prefix="/vehicles",
@@ -42,3 +43,18 @@ def read_vehicle(vehicle: schemas.Vehicle = Depends(get_vehicle_by_id)):
 def delete_vehicle(db: Session = Depends(get_db), vehicle: schemas.Vehicle = Depends(get_vehicle_by_id)):
     crud_vehicle.delete_vehicle(db, vehicle)
     return {"message": "Vehicle deleted"}
+
+
+@router.post("/send_to_call", response_model=call.Call)
+def send_vehicle_to_call(
+    vehicle_id: int,
+    call_id: int,
+    db: Session = Depends(get_db)):
+
+    updated_call = crud_vehicle.send_to_call(db, call_id, vehicle_id)
+
+    if not updated_call:
+        raise HTTPException(status_code=404, detail="Call not found")
+
+    return updated_call
+

@@ -12,11 +12,12 @@ class Vehicle(Base):
     coordinates_latitude = Column(Float)
     coordinates_longitude = Column(Float)
     type_id = Column(Integer, ForeignKey("vehicle_types.id"))
+    call_id = Column(Integer, ForeignKey("calls.id"))
 
     type = relationship("VehicleType", back_populates="vehicles")
 
     occupants = relationship("Staff", back_populates="vehicle")
     #building = relationship("Building", back_populates="staffs")
-    #mission = relationship("Emergency_Call", back_populates="vehicule")
+    call = relationship("Call", back_populates="vehicles")
 
 
