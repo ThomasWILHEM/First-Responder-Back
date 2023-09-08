@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from .vehicle_type import VehicleType
 from .call import Call
+from .building import Building
 from typing import Optional
 
 
@@ -9,12 +10,14 @@ class VehicleCreate(BaseModel):
     coordinates_longitude: float
     type_id: int
     call_id: Optional[int] = None
+    building_id: Optional[int] = None
 
 
 class Vehicle(VehicleCreate):
     id: int
     type: VehicleType
     call: Optional[Call] = None
+    building: Optional[Building] = None
 
 
 class VehicleUpdate(BaseModel):

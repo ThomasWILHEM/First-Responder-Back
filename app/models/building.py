@@ -5,6 +5,7 @@ from .staff import Staff
 
 from ..utils.database import Base
 
+
 class Building(Base):
     __tablename__ = "buildings"
 
@@ -16,3 +17,4 @@ class Building(Base):
 
     type = relationship("BuildingType")
     staffs = relationship("Staff", back_populates="building")
+    vehicles = relationship("Vehicle", back_populates="building")

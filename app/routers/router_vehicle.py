@@ -45,6 +45,19 @@ def delete_vehicle(db: Session = Depends(get_db), vehicle: schemas.Vehicle = Dep
     return {"message": "Vehicle deleted"}
 
 
+@router.post("/add_to_building", response_model=schemas.Vehicle)
+def add_vehicle_to_building(
+    vehicle_id: int,
+    building_id: int,
+    db: Session = Depends(get_db)):
+
+    updated_building = crud_vehicle.add_vehicle_to_building(db, vehicle_id, building_id)
+
+    if not updated_building:
+        raise HTTPException(status_code=404, detail="Building not found")
+
+    return updated_building
+
 @router.post("/send_to_call", response_model=call.Call)
 def send_vehicle_to_call(
     vehicle_id: int,
