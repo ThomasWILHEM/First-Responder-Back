@@ -1,16 +1,18 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, DateTime, Enum
+from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String, DateTime, Enum
 from sqlalchemy.orm import relationship
-from .building_type import Building_Type  
+from .building_type import BuildingType
 from .staff import Staff  
 
-from database import Base
+from ..utils.database import Base
 
 class Building(Base):
     __tablename__ = "buildings"
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, unique=True, index=True)
-    position = Column(String)
-    
-    type = relationship("Building_Type")
-    staffs = relationship("Staff", back_populates="building")
+    coordinates_latitude = Column(Float)
+    coordinates_longitude = Column(Float)
+    type_id = Column(Integer, ForeignKey("building_types.id"))
+
+    type = relationship("BuildingType")
+    #staffs = relationship("Staff", back_populates="building")
