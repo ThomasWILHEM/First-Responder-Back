@@ -48,11 +48,26 @@ def delete_staff(db: Session = Depends(get_db), staff: schemas.Staff = Depends(g
 def add_staff_to_vehicle(
     staff_id: int,
     vehicle_id: int,
-    db: Session = Depends(get_db),
-):
+    db: Session = Depends(get_db)):
+
     updated_vehicle = crud_staff.add_staff_to_vehicle(db, staff_id, vehicle_id)
 
     if not updated_vehicle:
         raise HTTPException(status_code=404, detail="Vehicle not found")
 
     return updated_vehicle
+
+
+@router.post("/add_to_building", response_model=schemas.Building)
+def add_staff_to_building(
+    staff_id: int,
+    building_id: int,
+    db: Session = Depends(get_db)):
+
+    updated_building = crud_staff.add_staff_to_building(db, staff_id, building_id)
+
+    if not updated_building:
+        raise HTTPException(status_code=404, detail="Building not found")
+
+    return updated_building
+

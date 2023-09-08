@@ -15,4 +15,4 @@ class Building(Base):
     type_id = Column(Integer, ForeignKey("building_types.id"))
 
     type = relationship("BuildingType")
-    #staffs = relationship("Staff", back_populates="building")
+    staffs = relationship("Staff", back_populates="building")

@@ -2,6 +2,7 @@ from sqlalchemy.orm import Session
 from ..models import staff, vehicle
 from ..schemas import staff as schemas
 from .crud_vehicle import get_vehicle
+from .crud_building import get_building
 
 
 def get_all_staffs(db: Session, skip: int = 0, limit: int = 100):
@@ -39,3 +40,19 @@ def add_staff_to_vehicle(db: Session, staff_id: int, vehicle_id: int):
 
     db.commit()
     return vehicle_instance
+
+
+def add_staff_to_building(db: Session, staff_id: int, building_id: int):
+    staff_instance = get_staff(db, staff_id)
+    building_instance = get_building(db, building_id)
+
+    if not staff_instance:
+        raise ValueError("Staff not found")
+    if not building_instance:
+        raise ValueError("Building not found")
+
+    building_instance.staffs.append(staff_instance)
+    staff_instance.building = building_instance
+
+    db.commit()
+    return building_instance

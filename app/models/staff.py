@@ -14,9 +14,10 @@ class Staff(Base):
     lastname = Column(String, index=True)
     type_id = Column(Integer, ForeignKey("staff_types.id"))
     vehicle_id = Column(Integer, ForeignKey("vehicles.id"))
+    building_id = Column(Integer, ForeignKey("buildings.id"))
 
     type = relationship("StaffType", back_populates="staffs")
     vehicle = relationship("Vehicle", back_populates="occupants")
-    #building = relationship("Building", back_populates="staffs")
+    building = relationship("Building", back_populates="staffs")
 
 

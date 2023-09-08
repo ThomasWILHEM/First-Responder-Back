@@ -2,6 +2,7 @@ from pydantic import BaseModel
 from typing import Optional
 from .staff_type import StaffType
 from .vehicle import Vehicle
+from .building import Building
 
 
 class StaffCreate(BaseModel):
@@ -9,12 +10,14 @@ class StaffCreate(BaseModel):
     lastname: str
     type_id: int
     vehicle_id: Optional[int] = None
+    building_id: Optional[int] = None
 
 
 class Staff(StaffCreate):
     id: int
     type: StaffType
     vehicle: Optional[Vehicle]
+    building: Optional[Building]
 
 
 class StaffUpdate(BaseModel):
