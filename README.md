@@ -15,3 +15,7 @@ Pour installer les librairies requises :
 Pour démarrer la base de donnée et l'adminer : 
     
     docker composer up -d
+
+Pour démarrer l'application : 
+
+    uvicorn app.main:app --reload
