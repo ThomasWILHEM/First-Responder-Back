@@ -1,17 +1,35 @@
-# First-Responder-Back
+# First Responder Back-End
 
-First Rsponder est une simulation d’opérateur de secours d’urgence où le joueur doit gérer des situations d'urgence simulées, en répondant à des appels et en envoyant des équipes de secours appropriées sur les lieux de l'incident. Le but est de sauver autant de vies que possible tout en gérant efficacement les ressources disponibles. Le jeu comprendra différents types de scénarios d'urgence, tels que des incendies, des accidents de la route et des catastrophes naturelles.
+**First Responder** est bien plus qu'une simple simulation. C'est une plongée au cœur de l'action en tant qu'opérateur de secours d'urgence. Dans ce back-end puissant, vous serez aux commandes de la gestion des situations de crise, réagissant à des appels urgents et déployant les équipes de secours nécessaires sur les lieux des incidents. L'objectif ultime est de sauver un maximum de vies tout en exploitant de manière optimale les ressources disponibles. Vous affronterez divers scénarios d'urgence, tels que des incendies, des accidents de la route et des catastrophes naturelles.
 
-Le joueur devra également gérer toute une équipe de personnel, de véhicules et d'infrastructures en fonction des besoins de chaque situation.
+## Caractéristiques principales
 
-Le joueur aura accès à une carte du monde en temps réel qui affichera les missions en cours et les véhicules en déplacement. Cela permettra au joueur de visualiser l'état actuel des opérations de secours et de prendre des décisions en conséquence.
+- **Variété de Scénarios** : Vous serez confronté à une diversité de situations d'urgence, chacune exigeant une approche unique pour réussir.
 
-## Démarage : 
+- **Gestion Complète** : Prenez en charge une équipe complète de personnel, de véhicules et d'infrastructures, adaptant vos ressources aux besoins spécifiques de chaque incident.
 
-Pour installer les librairies requises : 
+- **Surveillance en Temps Réel** : Grâce à un accès à une carte du monde en temps réel, vous pourrez suivre les missions en cours et surveiller les déplacements des véhicules, prenant ainsi des décisions éclairées pour optimiser vos opérations de secours.
 
+## Démarrage
+
+Suivez ces étapes pour démarrer le back-end de **First Responder** :
+
+1. Installez les bibliothèques requises en utilisant la commande suivante :
+
+    ```bash
     pip install -r requirements.txt
+    ```
 
-Pour démarrer la base de donnée et l'adminer : 
-    
-    docker composer up -d
+2. Pour lancer la base de données et l'outil d'administration (Adminer), exécutez la commande suivante :
+
+    ```bash
+    docker-compose up -d
+    ```
+
+3. Enfin, démarrez l'application avec la commande suivante :
+
+    ```bash
+    uvicorn app.main:app --reload
+    ```
+
+Vous voilà prêt à plonger dans le monde trépidant de la gestion des urgences en utilisant le back-end robuste de **First Responder**. Sauvez des vies, gérez des ressources et faites face à l'inattendu. Bon jeu !
