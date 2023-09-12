@@ -42,3 +42,13 @@ def read_building(building: schemas.Building = Depends(get_building_by_id)):
 def delete_building(db: Session = Depends(get_db), building: schemas.Building = Depends(get_building_by_id)):
     crud_building.delete_building(db, building)
     return {"message": "Building deleted"}
+
+
+@router.get("/{building_id}/vehicles")
+def read_building_vehicles(building: schemas.Building = Depends(get_building_by_id)):
+    return building.vehicles
+
+
+@router.get("/{building_id}/staffs")
+def read_building_staffs(building: schemas.Building = Depends(get_building_by_id)):
+    return building.staffs
