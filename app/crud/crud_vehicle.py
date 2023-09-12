@@ -12,6 +12,10 @@ def get_vehicle(db: Session, vehicle_id: int):
     return db.query(vehicle.Vehicle).filter(vehicle.Vehicle.id == vehicle_id).first()
 
 
+def get_vehicles_by_building_id(db: Session, building_id: int):
+    return db.query(vehicle.Vehicle).filter(vehicle.Vehicle.building_id == building_id).all()
+
+
 def create_vehicle(db: Session, vehicle_create: schemas.VehicleCreate):
     db_vehicle = vehicle.Vehicle(**vehicle_create.dict())
     db.add(db_vehicle)

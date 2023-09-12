@@ -13,6 +13,10 @@ def get_staff(db: Session, staff_id: int):
     return db.query(staff.Staff).filter(staff.Staff.id == staff_id).first()
 
 
+def get_staff_by_building_id(db: Session, building_id: int):
+    return db.query(staff.Staff).filter(staff.Staff.building_id == building_id).all()
+
+
 def create_staff(db: Session, staff_create: schemas.StaffCreate):
     db_staff = staff.Staff(**staff_create.dict())
     db.add(db_staff)

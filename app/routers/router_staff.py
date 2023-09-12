@@ -71,3 +71,8 @@ def add_staff_to_building(
 
     return updated_building
 
+
+@router.get("/from-building/{building_id}", response_model=schemas.AllStaffs)
+def read_staff_from_building(building_id: int, db: Session = Depends(get_db)):
+    staffs = crud_staff.get_staff_by_building_id(db, building_id)
+    return {"results": staffs}

@@ -71,3 +71,9 @@ def send_vehicle_to_call(
 
     return updated_call
 
+
+@router.get("/from-building/{building_id}", response_model=schemas.AllVehicles)
+def read_vehicles_from_building(building_id: int, db: Session = Depends(get_db)):
+    vehicles = crud_vehicle.get_vehicles_by_building_id(db, building_id)
+    return {"results": vehicles}
+
