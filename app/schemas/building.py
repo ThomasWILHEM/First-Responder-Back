@@ -3,6 +3,7 @@ from .building_type import BuildingType
 
 
 class BuildingCreate(BaseModel):
+    name: str
     coordinates_latitude: float
     coordinates_longitude: float
     type_id: int
