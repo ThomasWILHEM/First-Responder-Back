@@ -11,6 +11,7 @@ class Building(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, unique=True, index=True)
+    address = Column(String)
     coordinates_latitude = Column(Float)
     coordinates_longitude = Column(Float)
     type_id = Column(Integer, ForeignKey("building_types.id"))
