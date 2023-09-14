@@ -1,4 +1,5 @@
 from fastapi import Depends, FastAPI
+from typing import List
 
 from .routers import (router_scenario, router_scenario_type, router_call, router_vehicle_type, router_vehicle,
                       router_staff_type, router_staff, router_building_type, router_building)
@@ -37,6 +38,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
+class Database:
+    def get_data_from_db(self) -> List[str]:
+        return ["Donnée 1", "Donnée 2", "Donnée 3"]
 
 @app.get("/")
 async def root():
