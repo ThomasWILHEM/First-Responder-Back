@@ -12,8 +12,8 @@ jobs:
       postgres:
         image: postgres:latest
         env:
-          POSTGRES_DB: first-responder  # Remplacez par le nom de votre base de données
-          POSTGRES_USER: operator  # Remplacez par le nom d'utilisateur de la base de données
+          POSTGRES_DB: first-responder
+          POSTGRES_USER: operator
           POSTGRES_PASSWORD: admin
     
     steps:
