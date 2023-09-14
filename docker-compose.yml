@@ -2,7 +2,7 @@ version: '3.8'
 services:
   db:
     image: postgres:latest
-    container_name: my_postgres_db
+    container_name: db
     environment:
       POSTGRES_USER: operator
       POSTGRES_PASSWORD: admin
@@ -11,6 +11,19 @@ services:
       - "5432:5432"
     volumes:
       - pg_data:/var/lib/postgresql/data
+
+  db-tests:
+    image: postgres:latest
+    container_name: db-tests
+    environment:
+      POSTGRES_USER: operator
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: first-responder-tests
+    ports:
+      - "5433:5432"
+    volumes:
+      - pg_data_tests:/var/lib/postgresql/data
+
 
   adminer:
     image: adminer
@@ -22,3 +35,4 @@ services:
 
 volumes:
   pg_data:
+  pg_data_tests:

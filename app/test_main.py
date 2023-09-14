@@ -1,5 +1,7 @@
-from fastapi.testclient import TestClient
+from dotenv import load_dotenv
+load_dotenv(".env.tests")
 
+from fastapi.testclient import TestClient
 from .main import app
 
 client = TestClient(app)

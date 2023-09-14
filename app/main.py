@@ -1,3 +1,6 @@
+from dotenv import load_dotenv
+load_dotenv(".env")
+
 from fastapi import Depends, FastAPI
 
 from .routers import (router_scenario, router_scenario_type, router_call, router_vehicle_type, router_vehicle,
