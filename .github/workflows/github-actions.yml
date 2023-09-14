@@ -7,6 +7,14 @@ jobs:
     strategy:
       matrix:
         python-version: [3.11]
+
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_DB: first-responder  # Remplacez par le nom de votre base de données
+          POSTGRES_USER: operator  # Remplacez par le nom d'utilisateur de la base de données
+          POSTGRES_PASSWORD: admin
     
     steps:
       - name: Checkout code
@@ -19,6 +27,15 @@ jobs:
 
       - name: Install dependencies
         run: pip install -r requirements.txt
+
+      - name: Wait for PostgreSQL to start
+        run: |
+          for i in {1..30}; do
+            if pg_isready -h localhost -U myuser; then
+              break
+            fi
+            sleep 5
+          done
 
       - name: Run tests
         run: pytest
