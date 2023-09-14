@@ -12,11 +12,11 @@ jobs:
       postgres:
         image: postgres:latest
         env:
-          POSTGRES_DB: first-responder
+          POSTGRES_DB: first-responder-tests
           POSTGRES_USER: operator
           POSTGRES_PASSWORD: admin
         ports:
-          - 5432:5432
+          - 5433:5432
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
