@@ -36,6 +36,15 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: Populate PostgreSQL Database
+        env:
+          POSTGRES_HOST: localhost
+          POSTGRES_PORT: 5433
+          POSTGRES_DB: first-responder-tests
+          POSTGRES_USER: operator
+          POSTGRES_PASSWORD: admin
+        run: psql -h $POSTGRES_HOST -p $POSTGRES_PORT -U $POSTGRES_USER -d $POSTGRES_DB -a -f sql/votre_script.sql
+
       - name: Run tests
         run: pytest
 
