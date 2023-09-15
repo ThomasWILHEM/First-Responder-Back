@@ -43,7 +43,7 @@ jobs:
           POSTGRES_DB: first-responder-tests
           POSTGRES_USER: operator
           POSTGRES_PASSWORD: admin
-        run: PGPASSWORD=$POSTGRES_PASSWORD psql -h $POSTGRES_HOST -p $POSTGRES_PORT -U $POSTGRES_USER -d $POSTGRES_DB -a -f sql/votre_script.sql
+        run: PGPASSWORD=$POSTGRES_PASSWORD psql -h $POSTGRES_HOST -p $POSTGRES_PORT -U $POSTGRES_USER -d $POSTGRES_DB -a -f app/utils/create_tests_base.sql
 
       - name: Run tests
         run: pytest
