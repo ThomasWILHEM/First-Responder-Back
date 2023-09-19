@@ -1,28 +1,30 @@
 version: '3.8'
 services:
   db:
-    image: postgres:latest
+    image: mariadb:latest
     container_name: db
     environment:
-      POSTGRES_USER: operator
-      POSTGRES_PASSWORD: admin
-      POSTGRES_DB: first-responder
+      MYSQL_USER: operator
+      MYSQL_PASSWORD: admin
+      MYSQL_DATABASE: first-responder
+      MARIADB_ROOT_PASSWORD: admin
     ports:
-      - "5432:5432"
+      - "3306:3306"
     volumes:
-      - pg_data:/var/lib/postgresql/data
+      - mariadb_data:/var/lib/mysql
 
   db-tests:
-    image: postgres:latest
+    image: mariadb:latest
     container_name: db-tests
     environment:
-      POSTGRES_USER: operator
-      POSTGRES_PASSWORD: admin
-      POSTGRES_DB: first-responder-tests
+      MYSQL_USER: operator
+      MYSQL_PASSWORD: admin
+      MYSQL_DATABASE: first-responder-tests
+      MARIADB_ROOT_PASSWORD: admin
     ports:
-      - "5433:5432"
+      - "3307:3306"
     volumes:
-      - pg_data_tests:/var/lib/postgresql/data
+      - mariadb_data_tests:/var/lib/mysql
       - ./app/utils/create_tests_base.sql:/create_tests_base.sql
 
   adminer:
@@ -34,5 +36,5 @@ services:
       - db
 
 volumes:
-  pg_data:
-  pg_data_tests:
+  mariadb_data:
+  mariadb_data_tests:
