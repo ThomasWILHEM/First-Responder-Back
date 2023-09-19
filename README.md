@@ -34,7 +34,7 @@ Suivez ces étapes pour démarrer le back-end de **First Responder** :
 
 Vous voilà prêt à plonger dans le monde trépidanpt de la gestion des urgences en utilisant le back-end robuste de **First Responder**. Sauvez des vies, gérez des ressources et faites face à l'inattendu. Bon jeu !
 
-Si jamais vous voulez lancer les teste unitaires, il faut exécuter le script pour remplir la base dans le conteneur Docker de la base de données des tests.
+Si jamais vous voulez lancer les teste unitaires, il faut exécuter le script pour remplir la base dans le conteneur Docker de la base de données des tests. (bientot plus obligé)
    
       cat /create_tests_base.sql | psql -U operator -d first-responder-tests
 
