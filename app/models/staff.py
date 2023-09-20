@@ -10,8 +10,8 @@ class Staff(Base):
     __tablename__ = "staffs"
 
     id = Column(Integer, primary_key=True, index=True)
-    firstname = Column(String, index=True)
-    lastname = Column(String, index=True)
+    firstname = Column(String(255) , index=True)
+    lastname = Column(String(255) , index=True)
     type_id = Column(Integer, ForeignKey("staff_types.id"))
     vehicle_id = Column(Integer, ForeignKey("vehicles.id"))
     building_id = Column(Integer, ForeignKey("buildings.id"))

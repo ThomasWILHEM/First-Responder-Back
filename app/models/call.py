@@ -15,7 +15,7 @@ class Call(Base):
     datetime = Column(DateTime, default=datetime.utcnow)
     completion_datetime = Column(DateTime)
     scenario_id = Column(Integer, ForeignKey("scenarios.id"))
-    mission_status = Column(String)
+    mission_status = Column(String(255) )
 
     scenario = relationship("Scenario")
     vehicles = relationship("Vehicle", back_populates="call")

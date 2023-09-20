@@ -8,6 +8,6 @@ class VehicleType(Base):
     __tablename__ = "vehicle_types"
 
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, unique=True, index=True)
+    name = Column(String(255) , unique=True, index=True)
 
     vehicles = relationship("Vehicle", back_populates="type")

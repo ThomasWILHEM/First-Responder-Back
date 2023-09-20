@@ -7,6 +7,6 @@ class BuildingType(Base):
     __tablename__ = "building_types"
 
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, unique=True, index=True)
+    name = Column(String(255), unique=True, index=True)
 
     #buildings = relationship("Building", back_populates="type")

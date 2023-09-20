@@ -10,8 +10,8 @@ class Building(Base):
     __tablename__ = "buildings"
 
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, unique=True, index=True)
-    address = Column(String)
+    name = Column(String(255) , unique=True, index=True)
+    address = Column(String(255) )
     coordinates_latitude = Column(Float)
     coordinates_longitude = Column(Float)
     type_id = Column(Integer, ForeignKey("building_types.id"))

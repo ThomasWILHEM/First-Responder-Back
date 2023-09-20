@@ -4,8 +4,6 @@ services:
     image: mariadb:latest
     container_name: db
     environment:
-      MYSQL_USER: operator
-      MYSQL_PASSWORD: admin
       MYSQL_DATABASE: first-responder
       MARIADB_ROOT_PASSWORD: admin
     ports:
