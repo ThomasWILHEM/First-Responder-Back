@@ -9,16 +9,15 @@ jobs:
         python-version: [3.11]
 
     services:
-      postgres:
-        image: postgres:latest
+     mariadb:
+        image: mariadb:latest
         env:
-          POSTGRES_DB: first-responder-tests
-          POSTGRES_USER: operator
-          POSTGRES_PASSWORD: admin
+          MYSQL_ROOT_PASSWORD: admin
+          MYSQL_DATABASE: first-responder-tests
         ports:
-          - 5433:5432
+          - 3307:3306
         options: >-
-          --health-cmd pg_isready
+          --health-cmd "mysqladmin ping"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
@@ -35,15 +34,6 @@ jobs:
 
       - name: Install dependencies
         run: pip install -r requirements.txt
-
-      - name: Populate PostgreSQL Database
-        env:
-          POSTGRES_HOST: localhost
-          POSTGRES_PORT: 5433
-          POSTGRES_DB: first-responder-tests
-          POSTGRES_USER: operator
-          POSTGRES_PASSWORD: admin
-        run: PGPASSWORD=$POSTGRES_PASSWORD psql -h $POSTGRES_HOST -p $POSTGRES_PORT -U $POSTGRES_USER -d $POSTGRES_DB -a -f app/utils/create_tests_base.sql
 
       - name: Run tests
         run: pytest
