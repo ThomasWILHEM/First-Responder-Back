@@ -4,7 +4,9 @@ from ..schemas import building_type as schemas
 
 
 def get_all_building_types(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(building_type.BuildingType).offset(skip).limit(limit).all()
+    return (db.query(building_type.BuildingType)
+            .order_by(building_type.BuildingType.id.asc())
+            .offset(skip).limit(limit).all())
 
 
 def create_building_type(db: Session, building_type_create: schemas.BuildingType):
