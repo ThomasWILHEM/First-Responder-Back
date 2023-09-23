@@ -4,7 +4,9 @@ from ..schemas import building as schemas
 
 
 def get_all_buildings(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(building.Building).offset(skip).limit(limit).all()
+    return (db.query(building.Building)
+            .order_by(building.Building.id.asc())
+            .offset(skip).limit(limit).all())
 
 
 def get_building(db: Session, building_id: int):
