@@ -45,7 +45,7 @@ def delete_vehicle(db: Session = Depends(get_db), vehicle: schemas.Vehicle = Dep
     return {"message": "Vehicle deleted"}
 
 
-@router.post("/add_to_building", response_model=schemas.Vehicle)
+@router.post("/add_to_building", response_model=schemas.Building)
 def add_vehicle_to_building(
     vehicle_id: int,
     building_id: int,
