@@ -1,9 +1,8 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from .vehicle_type import VehicleType
-from .call import Call
 from .building import Building
 from typing import Optional
-
+from .call import Call
 
 class VehicleCreate(BaseModel):
     coordinates_latitude: float
@@ -16,7 +15,7 @@ class VehicleCreate(BaseModel):
 class Vehicle(VehicleCreate):
     id: int
     type: VehicleType
-    call: Optional[Call] = None
+    call: Optional[Call] = Field(default=None, forward_refs=True)
     building: Optional[Building] = None
 
 

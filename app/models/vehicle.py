@@ -19,6 +19,6 @@ class Vehicle(Base):
 
     occupants = relationship("Staff", back_populates="vehicle")
     building = relationship("Building", back_populates="vehicles")
-    call = relationship("Call", back_populates="vehicles")
+    call = relationship("Call")
 
 

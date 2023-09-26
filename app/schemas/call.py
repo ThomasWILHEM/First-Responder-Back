@@ -1,6 +1,7 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from datetime import datetime
 from .scenario import Scenario
+from typing import Optional
 
 
 class CallCreate(BaseModel):
