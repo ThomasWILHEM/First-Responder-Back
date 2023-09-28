@@ -1,11 +1,17 @@
 from sqlalchemy.orm import Session
 from ..models import vehicle
 from ..schemas import vehicle as schemas
-from . import crud_vehicle, crud_call, crud_building
+from . import crud_call, crud_building
 
 
-def get_all_vehicles(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(vehicle.Vehicle).offset(skip).limit(limit).all()
+def get_all_vehicles(db: Session, skip: int = 0, limit: int = 100, get_type: bool = False):
+    vehicles = db.query(vehicle.Vehicle).offset(skip).limit(limit).all()
+
+    if get_type:
+        for vehicle_in_list in vehicles:
+            db.refresh(vehicle_in_list.type)
+
+    return vehicles
 
 
 def get_vehicle(db: Session, vehicle_id: int):

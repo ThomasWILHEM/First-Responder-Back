@@ -19,7 +19,7 @@ def get_call_ressources(call_id: int, db: Session = Depends(get_db)):
     if db_call is None:
         raise HTTPException(status_code=404, detail="Call not found")
     vehicles_on_scene = crud_ressources.get_vehicles_on_scene(db, call_id)
-    all_vehicles = crud_vehicle.get_all_vehicles(db)
+    all_vehicles = crud_vehicle.get_all_vehicles(db, get_type=True)
     available_vehicles = [vehicule for vehicule in all_vehicles if vehicule.id not in [v.id for v in vehicles_on_scene]]
 
     return {

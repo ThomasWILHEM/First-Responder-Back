@@ -15,7 +15,7 @@ class VehicleCreate(BaseModel):
 class Vehicle(VehicleCreate):
     id: int
     type: VehicleType
-    call: Optional[Call] = Field(default=None, forward_refs=True)
+    call: Optional[Call] = None
     building: Optional[Building] = None
 
 
