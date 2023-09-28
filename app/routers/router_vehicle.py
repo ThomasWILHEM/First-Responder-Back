@@ -58,6 +58,7 @@ def add_vehicle_to_building(
 
     return updated_building
 
+
 @router.post("/send_to_call", response_model=call.Call)
 def send_vehicle_to_call(
     vehicle_id: int,
@@ -68,6 +69,21 @@ def send_vehicle_to_call(
 
     if not updated_call:
         raise HTTPException(status_code=404, detail="Call not found")
+
+    return updated_call
+
+@router.post("/send_multiple_to_call", response_model=call.Call)
+def send_vehicle_to_call(
+    vehicle_list: schemas.ListVehicle,
+    call_id: int,
+    db: Session = Depends(get_db)):
+
+    print("oui")
+    print(vehicle_list)
+    for vehicle in vehicle_list.vehicles:
+        updated_call = crud_vehicle.send_to_call(db, call_id, vehicle)
+        if not updated_call:
+            raise HTTPException(status_code=404, detail="Call not found")
 
     return updated_call
 

@@ -28,5 +28,9 @@ class VehicleDelete(VehicleCreate):
     id: int
 
 
+class ListVehicle(BaseModel):
+    vehicles: list[int]
+
+
 class AllVehicles(BaseModel):
     results: list[Vehicle]
