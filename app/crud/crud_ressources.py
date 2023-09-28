@@ -7,6 +7,7 @@ def get_vehicles_on_scene(db: Session, call_id: int):
 
     for vehicle in vehicles:
         db.refresh(vehicle.type)
+        db.refresh(vehicle.building)
 
     return vehicles
 

@@ -10,6 +10,7 @@ def get_all_vehicles(db: Session, skip: int = 0, limit: int = 100, get_type: boo
     if get_type:
         for vehicle_in_list in vehicles:
             db.refresh(vehicle_in_list.type)
+            db.refresh(vehicle_in_list.building)
 
     return vehicles
 
