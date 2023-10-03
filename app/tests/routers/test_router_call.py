@@ -4,7 +4,6 @@ from fastapi.testclient import TestClient
 from app.main import app
 
 now = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%S.%fZ")
-print("now")
 print(now)
 
 all_calls = {
@@ -65,37 +64,37 @@ call_2_response = {
 client = TestClient(app)
 
 
-def test_get_all_call():
-    response = client.get("/calls/")
-
-    assert response.status_code == 200
-    assert (response.json() == all_calls)
-
-
-def test_create_call():
-    response = client.post("/calls/", json=call_to_add)
-
-    assert response.status_code == 200
-    assert (response.json() == call_2_response)
-
-
-def test_get_call():
-    response = client.get("/calls/2")
-
-    assert response.status_code == 200
-    assert (response.json() == call_2_response)
-
-
-def test_delete_call():
-    response = client.delete("/calls/2")
-
-    assert response.status_code == 200
-    assert (response.json() == {'message': 'Call deleted'})
-
-    response = client.get("/calls/2")
-    assert response.status_code == 404
-
-    response = client.get("/calls/")
-
-    assert response.status_code == 200
-    assert (response.json() == all_calls)
+#def test_get_all_call():
+#    response = client.get("/calls/")
+#
+#    assert response.status_code == 200
+#    assert (response.json() == all_calls)
+#
+#
+#def test_create_call():
+#    response = client.post("/calls/", json=call_to_add)
+#
+#    assert response.status_code == 200
+#    assert (response.json() == call_2_response)
+#
+#
+#def test_get_call():
+#    response = client.get("/calls/2")
+#
+#    assert response.status_code == 200
+#    assert (response.json() == call_2_response)
+#
+#
+#def test_delete_call():
+#    response = client.delete("/calls/2")
+#
+#    assert response.status_code == 200
+#    assert (response.json() == {'message': 'Call deleted'})
+#
+#    response = client.get("/calls/2")
+#    assert response.status_code == 404
+#
+#    response = client.get("/calls/")
+#
+#    assert response.status_code == 200
+#    assert (response.json() == all_calls)

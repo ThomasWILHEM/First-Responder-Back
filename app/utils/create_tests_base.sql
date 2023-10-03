@@ -6,6 +6,8 @@ TRUNCATE TABLE vehicle_types;
 TRUNCATE TABLE vehicles;
 TRUNCATE TABLE scenario_types;
 TRUNCATE TABLE scenarios;
+TRUNCATE TABLE staff_types;
+TRUNCATE TABLE staffs;
 TRUNCATE TABLE calls;
 
 
@@ -15,6 +17,8 @@ ALTER TABLE vehicle_types AUTO_INCREMENT = 0;
 ALTER TABLE vehicles AUTO_INCREMENT = 0;
 ALTER TABLE scenario_types AUTO_INCREMENT = 0;
 ALTER TABLE scenarios AUTO_INCREMENT = 0;
+ALTER TABLE staff_types AUTO_INCREMENT = 0;
+ALTER TABLE staffs AUTO_INCREMENT = 0;
 ALTER TABLE calls AUTO_INCREMENT = 0;
 
 
@@ -45,6 +49,14 @@ INSERT INTO scenarios (name, description, type_id) VALUES
 ("Vol de voiture", "Un individu à volé une voiture", 1),
 ("Ivresse sur la voie publique", "Un individu est ivre sur la voie publique", 1),
 ("Accident de la route", "Un accident à eu lieu sur la voie publique", 2);
+
+INSERT INTO staff_types (name) VALUES
+('Pompier'),
+('Gendarme');
+
+INSERT INTO staffs (firstname, lastname, type_id, vehicle_id, building_id) VALUES
+("Jack", "Brown", 1, null, 2),
+("Marie", "Lisle", 2, null, 1);
 
 INSERT INTO calls (coordinates_latitude, coordinates_longitude, datetime, completion_datetime, scenario_id, mission_status) VALUES
 (44.582476, -0.031490, "2023-09-27 22:28:30", "2023-09-27 22:28:30", 1, "En cours");
