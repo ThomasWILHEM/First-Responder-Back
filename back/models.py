@@ -84,18 +84,17 @@ class Call(models.Model):
         ('completed', 'Completed'),
     )
 
-    name = models.CharField(max_length=100)
     coordinates_latitude = models.FloatField()
     coordinates_longitude = models.FloatField()
     datetime = models.DateTimeField(auto_now_add=True)
     completion_datetime = models.DateTimeField(null=True)
     mission_status = models.CharField(
         max_length=20,
-        choices=CALL_STATUS_CHOICES
+        choices=CALL_STATUS_CHOICES,
+        auto_created='not_started'
     )
 
     scenario = models.ForeignKey(Scenario, on_delete=models.CASCADE, related_name="calls")
 
-
     def __str__(self):
-        return f"{self.name} - {self.type.name}"
+        return f"{self.scenario.name} - {self.mission_status}"
