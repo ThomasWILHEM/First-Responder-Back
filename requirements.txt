@@ -1,8 +1,0 @@
-fastapi~=0.103.1
-pydantic~=2.3.0
-sqlalchemy
-alembic
-python-dotenv
-mysql-connector-python
-httpx
-pytest
