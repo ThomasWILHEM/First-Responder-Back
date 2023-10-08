@@ -16,7 +16,11 @@ class BuildingTypeDetails(generics.RetrieveUpdateDestroyAPIView):
 
 class BuildingList(generics.ListCreateAPIView):
     queryset = Building.objects.all()
-    serializer_class = BuildingSerializer
+
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return BuildingCreateSerializer
+        return BuildingSerializer
 
 
 class BuildingDetails(generics.RetrieveUpdateDestroyAPIView):

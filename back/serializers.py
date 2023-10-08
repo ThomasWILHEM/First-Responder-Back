@@ -16,6 +16,14 @@ class BuildingSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'address', 'coordinates_latitude', 'coordinates_longitude', 'type']
 
 
+class BuildingCreateSerializer(serializers.ModelSerializer):
+    type_id = serializers.PrimaryKeyRelatedField(queryset=BuildingType.objects.all(), source='type', write_only=True)
+
+    class Meta:
+        model = Building
+        fields = ('id', 'name', 'address', 'coordinates_latitude', 'coordinates_longitude', 'type_id')
+
+
 class VehicleTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = VehicleType
