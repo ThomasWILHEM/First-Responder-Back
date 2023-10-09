@@ -14,6 +14,7 @@ urlpatterns = [
     path('vehicle-types/<int:pk>', views.VehicleTypeDetails.as_view()),
     path('vehicles', views.VehicleList.as_view()),
     path('vehicles/<int:pk>', views.VehicleDetails.as_view()),
+    path('vehicles/<int:pk>/quit-call', views.VehicleQuitCall.as_view()),
 
     path('staff-types', views.StaffTypeList.as_view()),
     path('staff-types/<int:pk>', views.StaffTypeDetails.as_view()),

@@ -173,3 +173,18 @@ class SendVehiclesToCall(generics.UpdateAPIView):
         call.vehicles_on_scene.add(*vehicles_to_add)
 
         return Response({'message': 'Vehicles added to call successfully.'}, status=status.HTTP_200_OK)
+
+
+class VehicleQuitCall(generics.UpdateAPIView):
+    def update(self, request, *args, **kwargs):
+        vehicle_id = kwargs['pk']
+
+        try:
+            vehicle = Vehicle.objects.get(pk=vehicle_id)
+        except Vehicle.DoesNotExist:
+            return Response({'error': 'Vehicle with the given ID does not exist.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        vehicle.call = None
+        vehicle.save()
+
+        return Response({'message': 'Vehicle association updated successfully.'}, status=status.HTTP_200_OK)
