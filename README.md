@@ -10,6 +10,12 @@
 
 - **Surveillance en Temps Réel** : Grâce à un accès à une carte du monde en temps réel, vous pourrez suivre les missions en cours et surveiller les déplacements des véhicules, prenant ainsi des décisions éclairées pour optimiser vos opérations de secours.
 
+
+## Technologies utilisées : 
+   
+- Django
+- Django REST Framework
+
 ## Démarrage
 
 Suivez ces étapes pour démarrer le back-end de **First Responder** :
@@ -29,7 +35,7 @@ Suivez ces étapes pour démarrer le back-end de **First Responder** :
 3. Enfin, démarrez l'application avec la commande suivante :
 
     ```bash
-    uvicorn app.main:app --reload
+    python3 manage.py runserver
     ```
 
 Vous voilà prêt à plonger dans le monde trépidanpt de la gestion des urgences en utilisant le back-end robuste de **First Responder**. Sauvez des vies, gérez des ressources et faites face à l'inattendu. Bon jeu !
@@ -37,5 +43,5 @@ Vous voilà prêt à plonger dans le monde trépidanpt de la gestion des urgence
 Pour lancer les tests unitaires :
 
  ```bash
-pytest
+python3 manage.py test
  ```
