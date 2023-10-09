@@ -48,6 +48,10 @@ class VehicleCreateSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'coordinates_latitude', 'coordinates_longitude', 'type_id', 'building_id', 'call_id']
 
 
+class MultipleVehicles(serializers.Serializer):
+    vehicles = serializers.ListField(child=serializers.IntegerField())
+
+
 class StaffTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = StaffType

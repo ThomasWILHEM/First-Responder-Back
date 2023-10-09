@@ -150,3 +150,26 @@ class StaffsFromBuildingList(generics.ListCreateAPIView):
         building_id = self.kwargs['building_id']
         queryset = Staff.objects.filter(building_id=building_id)
         return queryset
+
+
+class SendVehiclesToCall(generics.UpdateAPIView):
+    serializer_class = MultipleVehicles
+
+    def update(self, request, *args, **kwargs):
+        call_id = kwargs['pk']
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        vehicle_ids = serializer.validated_data['vehicles']
+
+        try:
+            call = Call.objects.get(pk=call_id)
+        except Call.DoesNotExist:
+            return Response({'error': 'Call with the given ID does not exist.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        vehicles_to_add = Vehicle.objects.filter(pk__in=vehicle_ids)
+
+        # Associez les véhicules à l'appel
+        call.vehicles_on_scene.add(*vehicles_to_add)
+
+        return Response({'message': 'Vehicles added to call successfully.'}, status=status.HTTP_200_OK)
