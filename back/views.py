@@ -129,6 +129,11 @@ class CallDetails(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CallSerializer
 
 
+class CallDetailsWithRessources(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Call.objects.all()
+    serializer_class = CallWithRessourcesSerializer
+
+
 class VehiclesFromBuildingList(generics.ListCreateAPIView):
     serializer_class = VehicleSerializer
 

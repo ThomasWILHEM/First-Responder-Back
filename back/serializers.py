@@ -93,3 +93,22 @@ class CallSerializer(serializers.ModelSerializer):
         model = Call
         fields = ['id', 'coordinates_latitude', 'coordinates_longitude', 'datetime', 'completion_datetime',
                   'mission_status', 'scenario']
+
+
+class CallWithRessourcesSerializer(serializers.ModelSerializer):
+    scenario = ScenarioSerializer()
+    vehicles_on_scene = VehicleSerializer(many=True)
+    vehicles_available = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Call
+        fields = ['id', 'coordinates_latitude', 'coordinates_longitude', 'datetime', 'completion_datetime',
+                  'mission_status', 'scenario', 'vehicles_on_scene', 'vehicles_available']
+
+    def get_vehicles_available(self, obj):
+        all_vehicles = Vehicle.objects.all()
+        vehicles_on_scene = obj.vehicles_on_scene.all()
+        vehicles_available = all_vehicles.exclude(id__in=[vehicle.id for vehicle in vehicles_on_scene])
+        serializer = VehicleSerializer(vehicles_available, many=True)
+
+        return serializer.data

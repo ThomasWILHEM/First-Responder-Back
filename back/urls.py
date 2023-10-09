@@ -27,6 +27,7 @@ urlpatterns = [
 
     path('calls', views.CallList.as_view()),
     path('calls/<int:pk>', views.CallDetails.as_view()),
+    path('calls/<int:pk>/ressources', views.CallDetailsWithRessources.as_view()),
 
 
 ]
