@@ -175,6 +175,7 @@ class SendVehiclesToCall(generics.UpdateAPIView):
         return Response({'message': 'Vehicles added to call successfully.'}, status=status.HTTP_200_OK)
 
 
+
 class VehicleQuitCall(generics.UpdateAPIView):
     def update(self, request, *args, **kwargs):
         vehicle_id = kwargs['pk']
