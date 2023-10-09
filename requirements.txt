@@ -1,0 +1,6 @@
+mysql-connector-python
+httpx
+pytest
+Django
+django-cors-headers
+djangorestframework
