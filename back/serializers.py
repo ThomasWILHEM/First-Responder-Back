@@ -38,6 +38,16 @@ class VehicleSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'coordinates_latitude', 'coordinates_longitude', 'type', 'building']
 
 
+class VehicleCreateSerializer(serializers.ModelSerializer):
+    type_id = serializers.PrimaryKeyRelatedField(queryset=VehicleType.objects.all(), source='type', write_only=True)
+    building_id = serializers.PrimaryKeyRelatedField(queryset=Building.objects.all(), source='building', write_only=True)
+    call_id = serializers.PrimaryKeyRelatedField(queryset=Call.objects.all(), source='call', write_only=True, allow_null=True)
+
+    class Meta:
+        model = Vehicle
+        fields = ['id', 'name', 'coordinates_latitude', 'coordinates_longitude', 'type_id', 'building_id', 'call_id']
+
+
 class StaffTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = StaffType
@@ -50,6 +60,16 @@ class StaffSerializer(serializers.ModelSerializer):
     class Meta:
         model = Staff
         fields = ['id', 'firstname', 'lastname', 'type', 'building', 'vehicle']
+
+
+class StaffCreateSerializer(serializers.ModelSerializer):
+    type_id = serializers.PrimaryKeyRelatedField(queryset=StaffType.objects.all(), source='type', write_only=True)
+    building_id = serializers.PrimaryKeyRelatedField(queryset=Building.objects.all(), source='building', write_only=True)
+    vehicle_id = serializers.PrimaryKeyRelatedField(queryset=Vehicle.objects.all(), source='vehicle', write_only=True, allow_null=True)
+
+    class Meta:
+        model = Staff
+        fields = ['id', 'firstname', 'lastname', 'building_id', 'vehicle_id', 'type_id']
 
 
 class ScenarioTypeSerializer(serializers.ModelSerializer):

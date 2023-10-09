@@ -3,63 +3,6 @@ from django.db import models
 # Create your models here.
 
 
-class BuildingType(models.Model):
-    name = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.name
-
-
-class Building(models.Model):
-    name = models.CharField(max_length=100)
-    address = models.CharField(max_length=255)
-    coordinates_latitude = models.FloatField()
-    coordinates_longitude = models.FloatField()
-
-    type = models.ForeignKey(BuildingType, on_delete=models.CASCADE, related_name="buildings")
-
-    def __str__(self):
-        return f"{self.name} - {self.type.name}"
-
-
-class VehicleType(models.Model):
-    name = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.name
-
-
-class Vehicle(models.Model):
-    name = models.CharField(max_length=100)
-    coordinates_latitude = models.FloatField()
-    coordinates_longitude = models.FloatField()
-
-    type = models.ForeignKey(VehicleType, on_delete=models.CASCADE, related_name="vehicles")
-    building = models.ForeignKey(Building, on_delete=models.SET_NULL, related_name="vehicles", null=True)
-
-    def __str__(self):
-        return f"{self.name} - {self.type.name}"
-
-
-class StaffType(models.Model):
-    name = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.name
-
-
-class Staff(models.Model):
-    firstname = models.CharField(max_length=100)
-    lastname = models.CharField(max_length=100)
-
-    type = models.ForeignKey(StaffType, on_delete=models.CASCADE, related_name="vehicles")
-    building = models.ForeignKey(Building, on_delete=models.SET_NULL, related_name="staffs", null=True)
-    vehicle = models.ForeignKey(Vehicle, on_delete=models.SET_NULL, related_name="occupants", null=True)
-
-    def __str__(self):
-        return f"{self.name} - {self.type.name}"
-
-
 class ScenarioType(models.Model):
     name = models.CharField(max_length=100)
 
@@ -98,3 +41,61 @@ class Call(models.Model):
 
     def __str__(self):
         return f"{self.scenario.name} - {self.mission_status}"
+
+
+class BuildingType(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
+class Building(models.Model):
+    name = models.CharField(max_length=100)
+    address = models.CharField(max_length=255)
+    coordinates_latitude = models.FloatField()
+    coordinates_longitude = models.FloatField()
+
+    type = models.ForeignKey(BuildingType, on_delete=models.CASCADE, related_name="buildings")
+
+    def __str__(self):
+        return f"{self.name} - {self.type.name}"
+
+
+class VehicleType(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
+class Vehicle(models.Model):
+    name = models.CharField(max_length=100)
+    coordinates_latitude = models.FloatField()
+    coordinates_longitude = models.FloatField()
+
+    type = models.ForeignKey(VehicleType, on_delete=models.CASCADE, related_name="vehicles")
+    building = models.ForeignKey(Building, on_delete=models.SET_NULL, related_name="vehicles", null=True)
+    call = models.ForeignKey(Call, on_delete=models.SET_NULL, related_name="vehicles_on_scene", null=True)
+
+    def __str__(self):
+        return f"{self.name} - {self.type.name}"
+
+
+class StaffType(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
+class Staff(models.Model):
+    firstname = models.CharField(max_length=100)
+    lastname = models.CharField(max_length=100)
+
+    type = models.ForeignKey(StaffType, on_delete=models.CASCADE, related_name="vehicles")
+    building = models.ForeignKey(Building, on_delete=models.SET_NULL, related_name="staffs", null=True)
+    vehicle = models.ForeignKey(Vehicle, on_delete=models.SET_NULL, related_name="occupants", null=True)
+
+    def __str__(self):
+        return f"{self.name} - {self.type.name}"

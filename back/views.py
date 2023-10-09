@@ -1,5 +1,8 @@
+from rest_framework.response import Response
+
 from .serializers import *
-from rest_framework import generics
+from rest_framework import generics, status
+
 
 # Create your views here.
 
@@ -40,7 +43,21 @@ class VehicleTypeDetails(generics.RetrieveUpdateDestroyAPIView):
 
 class VehicleList(generics.ListCreateAPIView):
     queryset = Vehicle.objects.all()
-    serializer_class = VehicleSerializer
+
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return VehicleCreateSerializer
+        return VehicleSerializer
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+
+        vehicle_obj = serializer.instance
+        vehicle_with_type_serializer = VehicleSerializer(vehicle_obj)
+
+        return Response(vehicle_with_type_serializer.data, status=status.HTTP_201_CREATED)
 
 
 class VehicleDetails(generics.RetrieveUpdateDestroyAPIView):
@@ -60,7 +77,21 @@ class StaffTypeDetails(generics.RetrieveUpdateDestroyAPIView):
 
 class StaffList(generics.ListCreateAPIView):
     queryset = Staff.objects.all()
-    serializer_class = StaffSerializer
+
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return StaffCreateSerializer
+        return StaffSerializer
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+
+        staff_obj = serializer.instance
+        staff_with_type_serializer = StaffSerializer(staff_obj)
+
+        return Response(staff_with_type_serializer.data, status=status.HTTP_201_CREATED)
 
 
 class StaffDetails(generics.RetrieveUpdateDestroyAPIView):
@@ -96,3 +127,21 @@ class CallList(generics.ListCreateAPIView):
 class CallDetails(generics.RetrieveUpdateDestroyAPIView):
     queryset = Call.objects.all()
     serializer_class = CallSerializer
+
+
+class VehiclesFromBuildingList(generics.ListCreateAPIView):
+    serializer_class = VehicleSerializer
+
+    def get_queryset(self):
+        building_id = self.kwargs['building_id']
+        queryset = Vehicle.objects.filter(building_id=building_id)
+        return queryset
+
+
+class StaffsFromBuildingList(generics.ListCreateAPIView):
+    serializer_class = StaffSerializer
+
+    def get_queryset(self):
+        building_id = self.kwargs['building_id']
+        queryset = Staff.objects.filter(building_id=building_id)
+        return queryset
