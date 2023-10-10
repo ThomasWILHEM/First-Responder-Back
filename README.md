@@ -31,8 +31,14 @@ Suivez ces étapes pour démarrer le back-end de **First Responder** :
     ```bash
     docker-compose up -d
     ```
+   
+3. Effectuez les migrations :
 
-3. Enfin, démarrez l'application avec la commande suivante :
+    ```bash
+    python3 manage.py migrate
+    ```
+
+4. Enfin, démarrez l'application avec la commande suivante :
 
     ```bash
     python3 manage.py runserver
